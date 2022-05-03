@@ -71,3 +71,17 @@ exports.intersects = function (a, b) {
 		)
 	);
 }
+
+exports.unitBoundingBoxes = function (bBoxes) {
+	let lefts = bBoxes.map(el => el.left);
+	let tops = bBoxes.map(el => el.top);
+	let heights = bBoxes.map(el => el.top + el.height);
+	let widths = bBoxes.map(el => el.left + el.width);
+
+	return {
+		left: Math.min(...lefts),
+		top: Math.min(...tops),
+		height: Math.max(...heights) - Math.min(...tops),
+		width: Math.max(...widths) - Math.min(...lefts),
+	}
+}
